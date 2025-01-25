@@ -12,46 +12,65 @@ const hexToRgba = (hex, alpha = 0.8) => {
 const Home = () => {
   const [selectedLight, setSelectedLight] = useState("red");
 
-  // Define the colors with hex values
-  const colors = {
+  // Define colors as a state object
+  const [colors, setColors] = useState({
     red: {
-      backgroundColor: "#3d0000",  // Hex color for red
+      backgroundColor: "#8f0000", // Hex color for red
     },
     yellow: {
-      backgroundColor: "#666600",  // Hex color for yellow
+      backgroundColor: "#666600", // Hex color for yellow
     },
     green: {
-      backgroundColor: "#1D4909",  // Hex color for green
+      backgroundColor: "#1D4909", // Hex color for green
     },
-    // Add more colors as needed
-  };
+  });
 
-  // Get the keys (color names) of the colors object for cycling
-  const colorKeys = Object.keys(colors);
-
-  // Function to get the next color
+  // Function to get the next color in the cycle
   const getNextColor = () => {
+    const colorKeys = Object.keys(colors);
     const currentIndex = colorKeys.indexOf(selectedLight);
     const nextIndex = (currentIndex + 1) % colorKeys.length;
     return colorKeys[nextIndex];
   };
 
+  // Function to add a new color dynamically
+  const addColor = () => {
+    const newColorName = "purple";
+    setColors((prevColors) => ({
+      ...prevColors,
+      [newColorName]: {
+        backgroundColor: "#800080", // Hex color for purple
+      },
+    }));
+    setSelectedLight(newColorName); // Automatically select the new color
+  };
+
   return (
     <div className="d-flex flex-column align-items-center">
       <div id="trafficTop"></div>
-      <div id="lightContainer" className="d-flex flex-column align-items-center justify-content-around">
-        {colorKeys.map((color) => (
-			<div
-				key={color}
-				className={`light ${selectedLight === color ? "selected" : ""}`}
-				onClick={() => setSelectedLight(color)}
-				style={{
-					backgroundColor: colors[color].backgroundColor,
-					boxShadow: selectedLight === color 
-					? `0 0px 20px ${hexToRgba(colors[color].backgroundColor, 0.8)}, 0 0px 40px ${hexToRgba(colors[color].backgroundColor, 0.5)}`
-					: "none",
-				}}
-			></div>
+      <div
+        id="lightContainer"
+        className="d-flex flex-column align-items-center justify-content-around"
+      >
+        {Object.keys(colors).map((color) => (
+          <div
+            key={color}
+            className={`light ${selectedLight === color ? "selected" : ""}`}
+            onClick={() => setSelectedLight(color)}
+            style={{
+              backgroundColor: colors[color].backgroundColor,
+              boxShadow:
+                selectedLight === color
+                  ? `0 0px 20px ${hexToRgba(
+                      colors[color].backgroundColor,
+                      0.8
+                    )}, 0 0px 40px ${hexToRgba(
+                      colors[color].backgroundColor,
+                      0.5
+                    )}`
+                  : "none",
+            }}
+          ></div>
         ))}
       </div>
       <button
@@ -67,11 +86,9 @@ const Home = () => {
       <button
         type="button"
         className="btn btn-dark mt-5 myButton"
-        onClick={() => {
-          setSelectedLight(getNextColor());
-        }}
+        onClick={addColor}
       >
-        Add Color
+        Add Purple
       </button>
     </div>
   );

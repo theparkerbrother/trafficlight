@@ -50,3 +50,7 @@
 .selected {
     filter: brightness(4);
 }
+
+.myButton {
+    width: 200px;
+}

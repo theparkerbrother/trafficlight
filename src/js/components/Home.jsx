@@ -42,6 +42,21 @@ const Home = () => {
 				style={{ boxShadow: selectedLight === "green" ? getBoxShadow("green") : "" }}
 			></div>
 			</div>
+
+			<button 
+				type="button" 
+				className="btn btn-dark mt-5"
+				onClick={() => {
+					const colors = ["red","yellow","green"];
+					if(selectedLight==="red"){
+						setSelectedLight("yellow");
+					} else if(selectedLight==="yellow") {
+						setSelectedLight("green");
+					} else {
+						setSelectedLight("red");
+					}
+				}}
+			>Click Through Colors</button>
 		</div>
 	);
 };

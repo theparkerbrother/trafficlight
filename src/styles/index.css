@@ -9,3 +9,44 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+
+#trafficTop {
+    background-color: black;
+    height: 150px;
+    width: 15px;
+}
+
+#lightContainer {
+    background-color: black;
+    height: 450px;
+    width: 150px;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.light {
+    height: 120px;
+    width:120px;
+    border-radius: 60px;
+    background-color: white;
+}
+
+.red {
+    background-color: #3d0000;
+}
+
+.yellow {
+    background-color: #666600;
+}
+
+.green {
+    background-color: #1D4909;
+}
+
+.red, .yellow, .green {
+    transition: filter 0.1s, box-shadow 0.1s;
+}
+
+.selected {
+    filter: brightness(4);
+}
